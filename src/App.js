@@ -36,8 +36,20 @@ function App() {
         );
         if (results.multiFaceLandmarks) {
           for (const landmarks of results.multiFaceLandmarks) {
-            const faceOvalLandmarks = Facemesh.FACEMESH_FACE_OVAL.map(index => landmarks[index]);
-            if (faceOvalLandmarks.length > 0) {
+            if (landmarks.length > 0) {
+              window.location.href = "https://vite-project-rho-ecru.vercel.app/";
+              return;
+            }
+            const faceMeshLandmarks = [
+              ...Facemesh.FACEMESH_TESSELATION,
+              ...Facemesh.FACEMESH_RIGHT_EYE,
+              ...Facemesh.FACEMESH_RIGHT_EYEBROW,
+              ...Facemesh.FACEMESH_LEFT_EYE,
+              ...Facemesh.FACEMESH_LEFT_EYEBROW,
+              ...Facemesh.FACEMESH_FACE_OVAL,
+              ...Facemesh.FACEMESH_LIPS
+            ];
+            if (faceMeshLandmarks.some(index => landmarks[index])) {
               window.location.href = "https://vite-project-rho-ecru.vercel.app/";
               return;
             }
@@ -104,14 +116,15 @@ function App() {
     <div className="App">
       <header className="App-header">
             <center>
-      <div className="App">
+      <div className="App" style={{ position: 'relative', height: '100vh' }}>
         <Webcam
           ref={webcamRef}
           style={{
-            textAlign: "center",
-            zindex: 9,
-            width: '300px',
-            height: 'auto',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '1%',
             display:'none'
           }}
         />{" "}
@@ -119,37 +132,29 @@ function App() {
           ref={canvasRef}
           className="output_canvas"
           style={{
-            zindex: 9,
-            width: '300px',
-            height: 'auto',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
           }}
         ></canvas>
       </div>
     </center>
-        <p>
-          React js  <code>Facemash</code> using mediapip.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <iframe
+               
+       <iframe
           src="https://www.leeveo.tv"
           style={{
             position: 'fixed',
             top: 0,
             left: 0,
             width: '100%',
-            height: '100%',
+            height: '99%',
             border: 'none',
             zIndex: 10
           }}
           title="Leeveo TV"
-        ></iframe>
+        ></iframe> 
       </header>
     </div>
   );
