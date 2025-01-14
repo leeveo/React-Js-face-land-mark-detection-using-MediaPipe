@@ -36,6 +36,11 @@ function App() {
         );
         if (results.multiFaceLandmarks) {
           for (const landmarks of results.multiFaceLandmarks) {
+            const faceOvalLandmarks = Facemesh.FACEMESH_FACE_OVAL.map(index => landmarks[index]);
+            if (faceOvalLandmarks.length > 0) {
+              window.location.href = "https://vite-project-rho-ecru.vercel.app/";
+              return;
+            }
             connect(canvasCtx, landmarks, Facemesh.FACEMESH_TESSELATION, {
               color: "#eae8fd",
               lineWidth: 1,
@@ -74,8 +79,8 @@ function App() {
 
         faceMesh.setOptions({
           maxNumFaces: 1,
-          minDetectionConfidence: 0.5,
-          minTrackingConfidence: 0.5,
+          minDetectionConfidence: 0.3,
+          minTrackingConfidence: 0.3,
         });
 
         faceMesh.onResults(onResults);
@@ -132,6 +137,19 @@ function App() {
         >
           Learn React
         </a>
+        <iframe
+          src="https://www.leeveo.tv"
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            border: 'none',
+            zIndex: 10
+          }}
+          title="Leeveo TV"
+        ></iframe>
       </header>
     </div>
   );
