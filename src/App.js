@@ -153,8 +153,9 @@ function App() {
             border: 'none',
             zIndex: 10
           }}
-          controls
           autoPlay
+          muted
+          loop
         ></video> 
       </header>
     </div>
